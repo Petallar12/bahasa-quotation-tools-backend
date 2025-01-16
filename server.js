@@ -136,7 +136,7 @@ app.post('/send-email', async (req, res) => {
         </style>
       </head>
       <body>
-   <h1>Thank you for your application!</h1>
+   <h1>Thank you for your application! bahasa version</h1>
   <p>Dear ${contactInfo.fullName},</p>
   <p>Thank you for submitting your application! We've received your details and will get back to you shortly.</p>
   
