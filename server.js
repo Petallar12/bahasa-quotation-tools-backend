@@ -57,7 +57,7 @@ app.post('/send-email', async (req, res) => {
       </head>
       <body> 
       <h1>Contact Information</h1>
-      <p><strong>Full Name:</strong> ${contactInfo.fullName}</p>
+      <p><strong>Full Name bahasa:</strong> ${contactInfo.fullName}</p>
       <p><strong>Contact Number:</strong> ${contactInfo.contactNumber}</p>
       <p><strong>Email Address:</strong> ${contactInfo.emailAddress}</p>
       <p><strong>Country of Residence:</strong> ${contactInfo.country_residence}</p>
