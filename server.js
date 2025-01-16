@@ -136,12 +136,12 @@ app.post('/send-email', async (req, res) => {
         </style>
       </head>
       <body>
-   <h1>Thank you for your application!</h1>
-  <p>Dear ${contactInfo.fullName},</p>
-  <p>Thank you for submitting your application! We've received your details and will get back to you shortly.</p>
-  
+  <h1>Terima Kasih atas Aplikasi Anda!</h1>
+    <p>Kepada ${contactInfo.fullName},</p>
+    <p>Terima kasih telah mengirimkan aplikasi Anda! Kami telah menerima detail Anda dan akan segera menghubungi Anda.</p>
+
   <hr>
-  <h1>Your Plans and Premiums</h1>
+  <h1>Rencana dan Premi Anda</h1>
   <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
     <thead>
       <tr style="background-color: #f2f2f2;">
