@@ -45,74 +45,73 @@ app.post('/send-email', async (req, res) => {
     // Prepare the email content for the admin (your email)
     const emailContentForAdmin = `
    <html>
-  <head>
-    <style>
-      body { font-family: Arial, sans-serif; font-size:14px;}
-      h1 { color: #333; font-size: 18px; }
-      h2 { color: #333; font-size: 15px; }
-      th { background-color: #f2f2f2; color: black; padding: 10px; border: 1px solid #ddd; }
-      td { padding: 12px; border: 1px solid #ddd;}
-      table { border-collapse: collapse; width: 100%; }
-    </style>
-  </head>
-  <body> 
-    <h1>Informasi Kontak</h1>
-    <p><strong>Nama Lengkap:</strong> ${contactInfo.fullName}</p>
-    <p><strong>Nomor Kontak:</strong> ${contactInfo.contactNumber}</p>
-    <p><strong>Alamat Email:</strong> ${contactInfo.emailAddress}</p>
-    <p><strong>Negara Tempat Tinggal:</strong> ${contactInfo.country_residence}</p>
-    <p><strong>Kewarganegaraan:</strong> ${contactInfo.nationality}</p>
-    <p><strong>Area Cakupan:</strong> ${contactInfo.area_of_coverage}</p>
-    <hr>
-    <h1>Rencana dan Premi</h1>
-    <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
-      <thead>
-        <tr style="background-color: #f2f2f2;">
-          <th>Klien</th>
-          <th>Rumah Sakit & Operasi</th>
-          <th>Rawat Jalan</th>
-          <th>Maternitas</th>
-          <th>Dental</th>
-          <th>Subtotal</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${plans
-          .map(
-            (plan) => `
-          <tr>
-            <td>${plan.client}</td>
-            <td>
-              Rencana: ${plan.hospitalSurgeryPlan}<br>
-              Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
-              ${plan.hospitalSurgery.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}
-            </td>
-            <td>
-              Rencana: ${plan.outpatientPlan}<br>
-              Pemotongan: ${plan.outpatientDeductible}<br>
-              ${plan.outpatient.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}
-            </td>
-            <td>
-              Rencana: ${plan.maternityPlan}<br>
-              ${plan.maternity.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}
-            </td>
-            <td>
-              Rencana: ${plan.dentalPlan}<br>
-              ${plan.dental.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}
-            </td>
-            <td>
-               ${plan.subtotal.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}
-            </td>
-          </tr>
-          `)
-          .join('')}
-      </tbody>
-    </table>
-    <h2>Total Premi: USD${totalPremium.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}</h2></br>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; font-size:14px;}
+          h1 { color: #333; font-size: 18px; }
+          h2 { color: #333; font-size: 15px; }
+          th { background-color: #f2f2f2; color: black; padding: 10px; border: 1px solid #ddd; }
+          td { padding: 12px; border: 1px solid #ddd;}
+          table { border-collapse: collapse; width: 100%; }
+        </style>
+      </head>
+      <body> 
+        <h1>Informasi Kontak</h1>
+        <p><strong>Nama Lengkap:</strong> ${contactInfo.fullName}</p>
+        <p><strong>Nomor Kontak:</strong> ${contactInfo.contactNumber}</p>
+        <p><strong>Alamat Email:</strong> ${contactInfo.emailAddress}</p>
+        <p><strong>Negara Tempat Tinggal:</strong> ${contactInfo.country_residence}</p>
+        <p><strong>Kewarganegaraan:</strong> ${contactInfo.nationality}</p>
+        <p><strong>Area Cakupan:</strong> ${contactInfo.area_of_coverage}</p>
+        <hr>
+        <h1>Rencana dan Premi</h1>
+        <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
+          <thead>
+            <tr style="background-color: #f2f2f2;">
+              <th>Klien</th>
+              <th>Rumah Sakit & Operasi</th>
+              <th>Rawat Jalan</th>
+              <th>Maternitas</th>
+              <th>Dental</th>
+              <th>Subtotal</th>
+            </tr>
+          </thead>
+          <tbody>
+          ${plans
+            .map(
+              (plan) => `
+            <tr>
+              <td>${plan.client}</td>
+              <td>
+                Rencana: ${plan.hospitalSurgeryPlan}<br>
+                Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
+                ${plan.hospitalSurgery.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
+              </td>
+              <td>
+                Rencana: ${plan.outpatientPlan}<br>
+                Co Ins.: ${plan.outpatientDeductible}<br>
+                ${plan.outpatient.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
+              </td>
+              <td>
+                Rencana: ${plan.maternityPlan}<br>
+                ${plan.maternity.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
+              </td>
+              <td>
+                Rencana: ${plan.dentalPlan}<br>
+                ${plan.dental.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
+              </td>
+              <td>
+                 ${plan.subtotal.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
+              </td>
+            </tr>
+            `)
+            .join('')}
+        </tbody>
+      </table>
+    <h2>Total Premi: $${totalPremium.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}</h2></br>
     <p>www.lukemedikal.co.id </p>
-  </body>
-</html>
-
+            </body>
+    </html>
     `;
 
     // Send the email to the admin
@@ -125,72 +124,71 @@ app.post('/send-email', async (req, res) => {
 
     // Prepare the thank-you email content for the user
    const emailContentForUser = `
-   <html>
-  <head>
-    <style>
-      body { font-family: Arial, sans-serif; font-size:14px;}
-      h1 { color: #333; font-size: 18px; }
-      h2 { color: #333; font-size: 15px; }
-      th { background-color: #f2f2f2; color: black; padding: 10px; border: 1px solid #ddd; }
-      td { padding: 12px; border: 1px solid #ddd;}
-      table { border-collapse: collapse; width: 100%; }
-    </style>
-  </head>
-  <body>
-    <h1>Terima Kasih atas Aplikasi Anda!</h1>
-    <p>Kepada ${contactInfo.fullName},</p>
-    <p>Terima kasih telah mengirimkan aplikasi Anda! Kami telah menerima detail Anda dan akan segera menghubungi Anda.</p>
-    
-    <hr>
-    <h1>Rencana dan Premi Anda</h1>
-    <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
-      <thead>
-        <tr style="background-color: #f2f2f2;">
-          <th>Klien</th>
-          <th>Rumah Sakit & Operasi</th>
-          <th>Rawat Jalan</th>
-          <th>Maternitas</th>
-          <th>Dental</th>
-          <th>Subtotal</th>
-        </tr>
-      </thead>
-      <tbody>
-        ${plans
-          .map(
-            (plan) => `
-            <tr>
-              <td>${plan.client}</td>
-              <td>
-                Rencana: ${plan.hospitalSurgeryPlan}<br>
-                Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
-                ${plan.hospitalSurgery.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}
-              </td>
-              <td>
-                Rencana: ${plan.outpatientPlan}<br>
-                Pemotongan: ${plan.outpatientDeductible}<br>
-                ${plan.outpatient.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}
-              </td>
-              <td>
-                Rencana: ${plan.maternityPlan}<br>
-                ${plan.maternity.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}
-              </td>
-              <td>
-                Rencana: ${plan.dentalPlan}<br>
-                ${plan.dental.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}
-              </td>
-              <td>
-                ${plan.subtotal.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}
-              </td>
-            </tr>
-          `)
-          .join('')}
-      </tbody>
-    </table>
-    <h2>Total Premi: USD${totalPremium.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('id-ID'))}</h2>
+     <html>
+      <head>
+        <style>
+          body { font-family: Arial, sans-serif; font-size:14px;}
+          h1 { color: #333; font-size: 18px; }
+          h2 { color: #333; font-size: 15px; }
+          th { background-color: #f2f2f2; color: black; padding: 10px; border: 1px solid #ddd; }
+          td { padding: 12px; border: 1px solid #ddd;}
+          table { border-collapse: collapse; width: 100%; }
+        </style>
+      </head>
+      <body>
+   <h1>Thank you for your application!</h1>
+  <p>Dear ${contactInfo.fullName},</p>
+  <p>Thank you for submitting your application! We've received your details and will get back to you shortly.</p>
+  
+  <hr>
+  <h1>Your Plans and Premiums</h1>
+  <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
+    <thead>
+      <tr style="background-color: #f2f2f2;">
+        <th>Klien</th>
+        <th>Rumah Sakit & Operasi</th>
+        <th>Rawat Jalan</th>
+        <th>Maternitas</th>
+        <th>Dental</th>
+        <th>Subtotal</th>
+      </tr>
+    </thead>
+    <tbody>
+      ${plans
+        .map(
+          (plan) => `
+          <tr>
+            <td>${plan.client}</td>
+            <td>
+              Rencana: ${plan.hospitalSurgeryPlan}<br>
+              Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
+              ${plan.hospitalSurgery.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
+            </td>
+            <td>
+              Rencana: ${plan.outpatientPlan}<br>
+              Deductible: ${plan.outpatientDeductible}<br>
+              ${plan.outpatient.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
+            </td>
+            <td>
+              Rencana: ${plan.maternityPlan}<br>
+              ${plan.maternity.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
+            </td>
+            <td>
+              Rencana: ${plan.dentalPlan}<br>
+              ${plan.dental.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
+            </td>
+            <td>
+              ${plan.subtotal.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
+            </td>
+          </tr>
+        `)
+        .join('')}
+    </tbody>
+  </table>
+    <h2>Total Premi: $${totalPremium.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}</h2>
     </br><p>www.lukemedikal.co.id </p>
   </body>
 </html>
-
 `;
     // Send the thank-you email to the user
     await transporter.sendMail({
