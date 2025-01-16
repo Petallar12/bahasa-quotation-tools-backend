@@ -56,48 +56,48 @@ app.post('/send-email', async (req, res) => {
         </style>
       </head>
       <body> 
-        <h1>Informasi Kontak</h1>
-        <p><strong>Nama Lengkap:</strong> ${contactInfo.fullName}</p>
-        <p><strong>Nomor Kontak:</strong> ${contactInfo.contactNumber}</p>
-        <p><strong>Alamat Email:</strong> ${contactInfo.emailAddress}</p>
-        <p><strong>Negara Tempat Tinggal:</strong> ${contactInfo.country_residence}</p>
-        <p><strong>Kewarganegaraan:</strong> ${contactInfo.nationality}</p>
-        <p><strong>Area Cakupan:</strong> ${contactInfo.area_of_coverage}</p>
-        <hr>
-        <h1>Rencana dan Premi</h1>
-        <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
-          <thead>
-            <tr style="background-color: #f2f2f2;">
-              <th>Klien</th>
-              <th>Rumah Sakit & Operasi</th>
-              <th>Rawat Jalan</th>
-              <th>Maternitas</th>
-              <th>Dental</th>
-              <th>Subtotal</th>
-            </tr>
-          </thead>
-          <tbody>
+      <h1>Contact Information</h1>
+      <p><strong>Full Name:</strong> ${contactInfo.fullName}</p>
+      <p><strong>Contact Number:</strong> ${contactInfo.contactNumber}</p>
+      <p><strong>Email Address:</strong> ${contactInfo.emailAddress}</p>
+      <p><strong>Country of Residence:</strong> ${contactInfo.country_residence}</p>
+      <p><strong>Nationality:</strong> ${contactInfo.nationality}</p>
+      <p><strong>Area of Coverage:</strong> ${contactInfo.area_of_coverage}</p>
+      <hr>
+      <h1>Plans and Premiums</h1>
+      <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
+        <thead>
+          <tr style="background-color: #f2f2f2;">
+            <th>Client</th>
+            <th>Hospital & Surgery</th>
+            <th>Outpatient</th>
+            <th>Maternity</th>
+            <th>Dental</th>
+            <th>Subtotal</th>
+          </tr>
+        </thead>
+        <tbody>
           ${plans
             .map(
               (plan) => `
             <tr>
               <td>${plan.client}</td>
               <td>
-                Rencana: ${plan.hospitalSurgeryPlan}<br>
-                Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
+                Plan: ${plan.hospitalSurgeryPlan}<br>
+                Deductible: ${plan.hospitalSurgeryDeductible}<br>
                 ${plan.hospitalSurgery.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
               </td>
               <td>
-                Rencana: ${plan.outpatientPlan}<br>
-                Co Ins.: ${plan.outpatientDeductible}<br>
+                Plan: ${plan.outpatientPlan}<br>
+                Deductible: ${plan.outpatientDeductible}<br>
                 ${plan.outpatient.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
               </td>
               <td>
-                Rencana: ${plan.maternityPlan}<br>
+                Plan: ${plan.maternityPlan}<br>
                 ${plan.maternity.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
               </td>
               <td>
-                Rencana: ${plan.dentalPlan}<br>
+                Plan: ${plan.dentalPlan}<br>
                 ${plan.dental.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
               </td>
               <td>
@@ -108,7 +108,7 @@ app.post('/send-email', async (req, res) => {
             .join('')}
         </tbody>
       </table>
-    <h2>Total Premi: $${totalPremium.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}</h2></br>
+    <h2>Total Premium: $${totalPremium.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}</h2></br>
     <p>www.lukemedikal.co.id </p>
             </body>
     </html>
@@ -145,10 +145,10 @@ app.post('/send-email', async (req, res) => {
   <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
     <thead>
       <tr style="background-color: #f2f2f2;">
-        <th>Klien</th>
-        <th>Rumah Sakit & Operasi</th>
-        <th>Rawat Jalan</th>
-        <th>Maternitas</th>
+        <th>Client</th>
+        <th>Hospital & Surgery</th>
+        <th>Outpatient</th>
+        <th>Maternity</th>
         <th>Dental</th>
         <th>Subtotal</th>
       </tr>
@@ -160,21 +160,21 @@ app.post('/send-email', async (req, res) => {
           <tr>
             <td>${plan.client}</td>
             <td>
-              Rencana: ${plan.hospitalSurgeryPlan}<br>
-              Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
+              Plan: ${plan.hospitalSurgeryPlan}<br>
+              Deductible: ${plan.hospitalSurgeryDeductible}<br>
               ${plan.hospitalSurgery.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Rencana: ${plan.outpatientPlan}<br>
+              Plan: ${plan.outpatientPlan}<br>
               Deductible: ${plan.outpatientDeductible}<br>
               ${plan.outpatient.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Rencana: ${plan.maternityPlan}<br>
+              Plan: ${plan.maternityPlan}<br>
               ${plan.maternity.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Rencana: ${plan.dentalPlan}<br>
+              Plan: ${plan.dentalPlan}<br>
               ${plan.dental.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
@@ -185,7 +185,7 @@ app.post('/send-email', async (req, res) => {
         .join('')}
     </tbody>
   </table>
-    <h2>Total Premi: $${totalPremium.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}</h2>
+    <h2>Total Premium: $${totalPremium.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}</h2>
     </br><p>www.lukemedikal.co.id </p>
   </body>
 </html>
