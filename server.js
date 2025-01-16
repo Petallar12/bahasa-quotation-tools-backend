@@ -196,16 +196,16 @@ app.post('/send-email', async (req, res) => {
     await transporter.sendMail({
       from: '"Luke Medikal" <no-reply@lukemedikal.co.id>', // Sender email
       to: contactInfo.emailAddress, // User's email
-      subject: 'Terima Kasih atas Aplikasi Anda', // Email subject
+      subject: 'Thank you for your application', // Email subject
       html: emailContentForUser, // Email content in HTML
     });
 
     // Send a success response
-    res.status(200).send({ message: 'Email berhasil dikirim' });
+    res.status(200).send({ message: 'Emails sent successfully' });
 
   } catch (error) {
     console.error('Error sending email:', error);
-    res.status(500).send({ message: 'Terjadi kesalahan saat mengirim email', error });
+    res.status(500).send({ message: 'Error sending email', error });
   }
 });
 
