@@ -166,7 +166,7 @@ app.post('/send-email', async (req, res) => {
         .map(
           (plan) => `
           <tr>
-            <td>${plan.client.split('(')[0]} (${contactInfo.gender === 'Male' ? 'Laki-laki' : 'Perempuan'}, ${contactInfo.age})</td>
+            <td>${plan.client.split('(')[0]} (${plan.client.includes('Male') ? 'Laki-laki' : 'Perempuan'}, ${plan.client.match(/\d+/)[0]})</td>
             <td>
               Rencana: ${planTranslation[plan.hospitalSurgeryPlan] || plan.hospitalSurgeryPlan}<br>
                Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
