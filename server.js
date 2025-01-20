@@ -145,6 +145,7 @@ app.post('/send-email', async (req, res) => {
       </head>
       <body>
   <h1>Terima Kasih atas Aplikasi Anda!</h1>
+  <p>Klien: ${contactInfo.fullName} (${contactInfo.gender === 'Male' ? 'Laki-laki' : 'Perempuan'}, ${contactInfo.age})</p>
     <p>Kepada ${contactInfo.fullName},</p>
     <p>Terima kasih telah mengirimkan aplikasi Anda! Kami telah menerima detail Anda dan akan segera menghubungi Anda.</p>
 
