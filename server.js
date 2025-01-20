@@ -5,6 +5,14 @@ const bodyParser = require('body-parser');
 require('dotenv').config(); // Load environment variables
 const app = express();
 const PORT = 5000;
+// Translation for plan names
+const planTranslation = {
+  Elite: "Elit",
+  Extensive: "Ekstensif",
+  Essential: "Esensial",
+  Core: "Inti",
+  "N/A": "Tidak Ada",
+};
 
 // Middleware
 app.use(cors({
@@ -160,21 +168,21 @@ app.post('/send-email', async (req, res) => {
           <tr>
             <td>${plan.client}</td>
             <td>
-              Rencana: ${plan.hospitalSurgeryPlan}<br>
-              Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
+              Rencana: ${planTranslation[plan.hospitalSurgeryPlan] || plan.hospitalSurgeryPlan}<br>
+               Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
               ${plan.hospitalSurgery.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Rencana: ${plan.outpatientPlan}<br>
+              Rencana: ${planTranslation[plan.outpatientPlan] || plan.outpatientPlan}<br>
               Deductible: ${plan.outpatientDeductible}<br>
               ${plan.outpatient.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Rencana: ${plan.maternityPlan}<br>
+              Rencana: ${planTranslation[plan.maternityPlan] || plan.maternityPlan}<br>
               ${plan.maternity.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Rencana: ${plan.dentalPlan}<br>
+              Rencana: ${planTranslation[plan.dentalPlan] || plan.dentalPlan}<br>
               ${plan.dental.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
