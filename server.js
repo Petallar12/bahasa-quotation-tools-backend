@@ -6,13 +6,13 @@ require('dotenv').config(); // Load environment variables
 const app = express();
 const PORT = 5000;
 // Translation for plan names
-const planTranslation = {
-  Elite: "Elit",
-  Extensive: "Ekstensif",
-  Essential: "Esensial",
-  Core: "Inti",
-  "N/A": "Tidak Ada",
-};
+// const planTranslation = {
+//   Elite: "Elit",
+//   Extensive: "Ekstensif",
+//   Essential: "Esensial",
+//   Core: "Inti",
+//   "N/A": "Tidak Ada",
+// };
 
 // Middleware
 app.use(cors({
@@ -168,21 +168,21 @@ app.post('/send-email', async (req, res) => {
           <tr>
             <td>${plan.client.split('(')[0]} (${plan.client.includes('Male') ? 'Laki-laki' : 'Perempuan'}, ${plan.client.match(/\d+/)[0]})</td>
             <td>
-              Plans: ${planTranslation[plan.hospitalSurgeryPlan] || plan.hospitalSurgeryPlan}<br>
+                Plans: ${plan.hospitalSurgeryPlan}<br>
                Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
               ${plan.hospitalSurgery.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Plans: ${planTranslation[plan.outpatientPlan] || plan.outpatientPlan}<br>
+                Plans: ${plan.outpatientPlan}<br>
               Deductible: ${plan.outpatientDeductible}<br>
               ${plan.outpatient.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Plans: ${planTranslation[plan.maternityPlan] || plan.maternityPlan}<br>
+                Plans: ${plan.maternityPlan}<br>
               ${plan.maternity.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Plans: ${planTranslation[plan.dentalPlan] || plan.dentalPlan}<br>
+                Plans: ${plan.dentalPlan}<br>
               ${plan.dental.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
