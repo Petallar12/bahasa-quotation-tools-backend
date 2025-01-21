@@ -72,14 +72,14 @@ app.post('/send-email', async (req, res) => {
         <p><strong>Kewarganegaraan:</strong> ${contactInfo.nationality}</p>
         <p><strong>Area Cakupan:</strong> ${contactInfo.area_of_coverage}</p>
         <hr>
-        <h1>Rencana dan Premi</h1>
+        <h1>Plans dan Premi</h1>
         <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
           <thead>
             <tr style="background-color: #f2f2f2;">
               <th>Klien</th>
               <th>Rumah Sakit & Operasi</th>
               <th>Rawat Jalan</th>
-              <th>Maternitas</th>
+              <th>Kehamilan</th>
               <th>Dental</th>
               <th>Subtotal</th>
             </tr>
@@ -91,21 +91,21 @@ app.post('/send-email', async (req, res) => {
             <tr>
               <td>${plan.client}</td>
               <td>
-                Rencana: ${plan.hospitalSurgeryPlan}<br>
+                Plans: ${plan.hospitalSurgeryPlan}<br>
                 Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
                 ${plan.hospitalSurgery.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
               </td>
               <td>
-                Rencana: ${plan.outpatientPlan}<br>
+                Plans: ${plan.outpatientPlan}<br>
                 Co Ins.: ${plan.outpatientDeductible}<br>
                 ${plan.outpatient.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
               </td>
               <td>
-                Rencana: ${plan.maternityPlan}<br>
+                Plans: ${plan.maternityPlan}<br>
                 ${plan.maternity.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
               </td>
               <td>
-                Rencana: ${plan.dentalPlan}<br>
+                Plans: ${plan.dentalPlan}<br>
                 ${plan.dental.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
               </td>
               <td>
@@ -149,14 +149,14 @@ app.post('/send-email', async (req, res) => {
     <p>Terima kasih telah mengirimkan aplikasi Anda! Kami telah menerima detail Anda dan akan segera menghubungi Anda.</p>
 
   <hr>
-  <h1>Rencana dan Premi Anda</h1>
+  <h1>Plans dan Premi Anda</h1>
   <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%;">
     <thead>
       <tr style="background-color: #f2f2f2;">
         <th>Klien</th>
         <th>Rumah Sakit & Operasi</th>
         <th>Rawat Jalan</th>
-        <th>Maternitas</th>
+        <th>Kehamilan</th>
         <th>Dental</th>
         <th>Subtotal</th>
       </tr>
@@ -168,21 +168,21 @@ app.post('/send-email', async (req, res) => {
           <tr>
             <td>${plan.client.split('(')[0]} (${plan.client.includes('Male') ? 'Laki-laki' : 'Perempuan'}, ${plan.client.match(/\d+/)[0]})</td>
             <td>
-              Rencana: ${planTranslation[plan.hospitalSurgeryPlan] || plan.hospitalSurgeryPlan}<br>
+              Plans: ${planTranslation[plan.hospitalSurgeryPlan] || plan.hospitalSurgeryPlan}<br>
                Pemotongan: ${plan.hospitalSurgeryDeductible}<br>
               ${plan.hospitalSurgery.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Rencana: ${planTranslation[plan.outpatientPlan] || plan.outpatientPlan}<br>
+              Plans: ${planTranslation[plan.outpatientPlan] || plan.outpatientPlan}<br>
               Deductible: ${plan.outpatientDeductible}<br>
               ${plan.outpatient.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Rencana: ${planTranslation[plan.maternityPlan] || plan.maternityPlan}<br>
+              Plans: ${planTranslation[plan.maternityPlan] || plan.maternityPlan}<br>
               ${plan.maternity.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
-              Rencana: ${planTranslation[plan.dentalPlan] || plan.dentalPlan}<br>
+              Plans: ${planTranslation[plan.dentalPlan] || plan.dentalPlan}<br>
               ${plan.dental.replace(/(\d+)/, (num) => parseFloat(num).toLocaleString('en-US'))}
             </td>
             <td>
